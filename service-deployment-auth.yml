@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: auth-service-deployment
+  labels:
+    env: sandbox
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      env: sandbox
+  template:
+    metadata:
+      labels:
+        env: sandbox
+    spec:
+      containers:
+        - name: auth-cntr
+          image: istatimanjusai/auth-img
+          ports:
+            - containerPort: 8090
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: auth-service
+  labels:
+    env: auth-service
+spec:
+  type: LoadBalancer
+  ports:
+    - port: 2090
+      targetPort: 8090
+  selector:
+    env: auth-service
