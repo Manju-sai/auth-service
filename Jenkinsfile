@@ -8,7 +8,7 @@ pipeline {
 		stage('Clone'){			
 			steps {git url:'https://github.com/Manju-sai/auth-service.git', branch:'main'}			}		
 		stage('Build'){			
-			steps {bat "clean package -DskipTests"}		
+			steps {bat "mvn clean install -DskipTests"}		
 		}		
 		stage('PreDeploy'){			
 			steps{bat "docker rmi -f auth-img"			    
