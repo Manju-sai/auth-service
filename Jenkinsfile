@@ -1,5 +1,6 @@
 pipeline {	
-	agent any	tools {	    
+	agent any	
+	tools {	    
 		maven 'my-maven'		
 		jdk 'my-jdk'	
 	}	
@@ -10,11 +11,11 @@ pipeline {
 			steps {sh "clean package -DskipTests"}		
 		}		
 		stage('PreDeploy'){			
-			steps{bat "docker rmi -f auth-image ."			    
+			steps{bat "docker rmi -f auth-img ."			    
 			            bat "docker rm -f auth-cntr"	}		
 		}
 		stage('Deploy') {			
-			steps { bat "docker build -t auth-image ."			    
+			steps { bat "docker build -t auth-img ."			    
 			            bat "docker run -p 6090:8090 -d --name auth-cntr auth-img"}		
 		}		
 	}
