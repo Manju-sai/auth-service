@@ -8,10 +8,10 @@ pipeline {
 		stage('Clone'){			
 			steps {git url:'https://github.com/Manju-sai/auth-service.git', branch:'main'}			}		
 		stage('Build'){			
-			steps {sh "clean package -DskipTests"}		
+			steps {bat "clean package -DskipTests"}		
 		}		
 		stage('PreDeploy'){			
-			steps{bat "docker rmi -f auth-img ."			    
+			steps{bat "docker rmi -f auth-img"			    
 			            bat "docker rm -f auth-cntr"	}		
 		}
 		stage('Deploy') {			
